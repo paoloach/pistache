@@ -232,12 +232,16 @@ Listener::run() {
 void
 Listener::runThreaded() {
     shutdownFd.bind(poller);
-    acceptThread.reset(new std::thread([=]() { this->run(); }));
+        acceptThread.reset(new std::thread([=]() { this->run(); }));
 }
 
 void
 Listener::shutdown() {
-    if (shutdownFd.isBound()) shutdownFd.notify();
+    if (shutdownFd.isBound()) {
+        shutdownFd.notify();
+        ::shutdown(listen_fd,SHUT_RDWR);
+        ::close(listen_fd);
+    }
     reactor_->shutdown();
 }
 
