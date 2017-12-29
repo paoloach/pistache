@@ -142,10 +142,10 @@ private:
     Directive directive_;
     // Poor way of representing tagged unions in C++
     union {
-        struct { uint64_t maxAge; };
-        struct { uint64_t sMaxAge; };
-        struct { uint64_t maxStale; };
-        struct { uint64_t minFresh; };
+        uint64_t maxAge;
+        uint64_t sMaxAge;
+        uint64_t maxStale;
+        uint64_t minFresh;
     } data;
 };
 

@@ -932,7 +932,7 @@ namespace Async {
             -> decltype(std::declval<Func>()(Deferred<T>()), void()) {
             func(Deferred<T>(std::move(resolver), std::move(rejection)));
         }
-   };
+   }
 
     template<typename T>
     class Promise : public PromiseBase

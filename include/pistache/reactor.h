@@ -204,7 +204,7 @@ public:
     };
 
     virtual void onReady(const FdSet& fds) = 0;
-    virtual void registerPoller(Polling::Epoll& poller) { }
+    virtual void registerPoller(Polling::Epoll& ) { }
 
     Reactor* reactor() const {
         return reactor_;

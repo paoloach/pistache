@@ -88,16 +88,17 @@ private:
         enum Type { Raw, File };
 
         explicit BufferHolder(const Buffer& buffer, off_t offset = 0)
-            : type(Raw)
-            , u(buffer)
+            : u(buffer),
+              type(Raw)
         {
             offset_ = offset;
             size_ = buffer.len;
         }
 
         explicit BufferHolder(const FileBuffer& buffer, off_t offset = 0)
-            : type(File)
-            , u(buffer.fd())
+            : u(buffer.fd()),
+              type(File)
+
         {
             offset_ = offset;
             size_ = buffer.size();

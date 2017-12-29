@@ -38,7 +38,7 @@ namespace details {
         static constexpr bool value =
             std::is_same<decltype(test<P>(nullptr)), prototype_tag>::value;
     };
-};
+}
 
 #define HTTP_PROTOTYPE(Class) \
     PROTOTYPE_OF(Pistache::Tcp::Handler, Class) \
@@ -230,9 +230,9 @@ public:
 
 private:
     Timeout(const Timeout& other)
-        : transport(other.transport)
-        , handler(other.handler)
+        : handler(other.handler)
         , request(other.request)
+        , transport(other.transport)
         , armed(other.armed)
         , timerFd(other.timerFd)
     { }
@@ -240,9 +240,9 @@ private:
     Timeout(Tcp::Transport* transport,
             Handler* handler,
             Request request)
-        : transport(transport)
-        , handler(handler)
+        : handler(handler)
         , request(std::move(request))
+        , transport(transport)
         , armed(false)
         , timerFd(-1)
     {
@@ -517,7 +517,7 @@ public:
        return &buf_;
     }
 
-    DynamicStreamBuf *rdbuf(DynamicStreamBuf* other) {
+    DynamicStreamBuf *rdbuf(DynamicStreamBuf* ) {
        throw std::domain_error("Unimplemented");
     }
 
@@ -651,14 +651,14 @@ namespace Private {
 
     struct ParserBase {
         ParserBase()
-            : currentStep(0)
-            , cursor(&buffer)
+            : cursor(&buffer),
+              currentStep(0)
         {
         }
 
-        ParserBase(const char* data, size_t len)
-            : currentStep(0)
-            , cursor(&buffer)
+        ParserBase(const char* , size_t )
+            : cursor(&buffer),
+              currentStep(0)
         {
         }
 
